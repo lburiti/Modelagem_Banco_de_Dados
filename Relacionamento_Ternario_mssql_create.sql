@@ -1,0 +1,58 @@
+CREATE TABLE [Paciente] (
+	IdPaciente binary NOT NULL,
+  CONSTRAINT [PK_PACIENTE] PRIMARY KEY CLUSTERED
+  (
+  [IdPaciente] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [Medico] (
+	IdMedico binary NOT NULL,
+  CONSTRAINT [PK_MEDICO] PRIMARY KEY CLUSTERED
+  (
+  [IdMedico] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [Exame] (
+	IdExame integer NOT NULL,
+  CONSTRAINT [PK_EXAME] PRIMARY KEY CLUSTERED
+  (
+  [IdExame] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [Consulta] (
+	IdConsulta binary NOT NULL,
+	IdMedico binary NOT NULL,
+	IdPaciente binary NOT NULL,
+	IdExame binary NOT NULL,
+  CONSTRAINT [PK_CONSULTA] PRIMARY KEY CLUSTERED
+  (
+  [IdConsulta] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+
+
+
+ALTER TABLE [Consulta] WITH CHECK ADD CONSTRAINT [Consulta_fk0] FOREIGN KEY ([IdMedico]) REFERENCES [Medico]([IdMedico])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [Consulta] CHECK CONSTRAINT [Consulta_fk0]
+GO
+ALTER TABLE [Consulta] WITH CHECK ADD CONSTRAINT [Consulta_fk1] FOREIGN KEY ([IdPaciente]) REFERENCES [Paciente]([IdPaciente])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [Consulta] CHECK CONSTRAINT [Consulta_fk1]
+GO
+ALTER TABLE [Consulta] WITH CHECK ADD CONSTRAINT [Consulta_fk2] FOREIGN KEY ([IdExame]) REFERENCES [Exame]([IdExame])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [Consulta] CHECK CONSTRAINT [Consulta_fk2]
+GO
+
